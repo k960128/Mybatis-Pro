@@ -1,6 +1,7 @@
 package com.mybatis.demo1.main;
 
 import com.mybatis.demo1.dao.TbUserDao;
+import com.mybatis.demo1.dao.UserDao;
 import com.mybatis.demo1.dao.impl.TbUserDaoImpl;
 import com.mybatis.demo1.pojo.TbUser;
 import org.apache.ibatis.io.Resources;
@@ -110,5 +111,18 @@ public class MybatisTest {
         System.out.println("开始删除....");
         this.tbUserDao.delUser(2);
         System.out.println("删除成功.......");
+    }
+
+    /*
+    * 测试 #{} ${}
+    * 通常在方法的参数列表上加上一个注释@Param("XXX") 显示指定参数的名字，然后通过${} #{}
+    * Sql语句动态生成的时候，使用${}
+    * Sql语句中某个参数进行站位的时候使用#{}
+    * */
+    @Test
+    public void querUser(){
+        UserDao userDao = sqlSession.getMapper(UserDao.class);
+        //userDao.queryUser("User");
+        //userDao.queryUser1("User");
     }
 }
