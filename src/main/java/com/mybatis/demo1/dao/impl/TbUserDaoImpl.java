@@ -15,22 +15,22 @@ public class TbUserDaoImpl implements TbUserDao {
 
 
     public List<TbUser> queryUserAll() {
-        return sqlSession.selectList("tbUserDao.queryUserAll");
+        return sqlSession.selectList("TbUserDao.queryUserAll");
     }
 
     public TbUser findUserById(int id) {
-        return sqlSession.selectOne("tbUserDao.findUserById",id);
+        return sqlSession.selectOne("TbUserDao.findUserById",id);
     }
 
     public void insertUser(TbUser tbUser) {
-        this.sqlSession.insert("tbUserDao.insertUser",tbUser);
+        this.sqlSession.insert("TbUserDao.insertUser",tbUser);
     }
 
     public void updateUser(TbUser tbUser) {
-        this.sqlSession.update("tbUserDao.updateUser",tbUser);
+        this.sqlSession.update("TbUserDao.updateUser",tbUser);
     }
 
     public void delUser(int id) {
-        this.sqlSession.delete("tbUserDao.delUser",id);
+        this.sqlSession.delete("TbUserDao.delUser",id);
     }
 }

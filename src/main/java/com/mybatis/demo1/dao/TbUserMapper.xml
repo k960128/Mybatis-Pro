@@ -2,12 +2,12 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mybatis.demo1.dao.TbUserDao">
+<mapper namespace="TbUserDao">
 
 
     <!--查询全部-->
     <select id="queryUserAll" resultType="com.mybatis.demo1.pojo.TbUser">
-        SELECT * FROM TB_USER;
+        SELECT * FROM TB_USER
     </select>
 
     <!--根据ID查询-->
@@ -43,15 +43,15 @@
     <update id="updateUser" parameterType="com.mybatis.demo1.pojo.TbUser">
         UPDATE TB_USER
         <trim prefix="set" suffixOverrides=",">
-            <if test="userName!=null">user_name = #{user_name},</if>
+            <if test="user_name!=null">user_name = #{user_name},</if>
             <if test="password!=null">password = #{password},</if>
             <if test="name!=null">name = #{name},</if>
             <if test="age!=null">age = #{age},</if>
             <if test="sex!=null">sex = #{sex},</if>
             <if test="birthday!=null">birthday = #{birthday},</if>
-            update = now(),
+            updated = now(),
         </trim>
-        WHERE ID = #{ID}
+        WHERE id = #{id}
     </update>
 
     <!--删除-->

@@ -2,11 +2,60 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mybatis.demo1.dao.TbUserDao">
+<mapper namespace="TbUserDao">
 
 
     <!--查询全部-->
     <select id="queryUserAll" resultType="com.mybatis.demo1.pojo.TbUser">
         SELECT * FROM TB_USER
     </select>
+
+    <!--根据ID查询-->
+    <select id="findUserById" resultType="com.mybatis.demo1.pojo.TbUser">
+        SELECT * FROM TB_USER WHERE ID=#{ID};
+    </select>
+
+    <!--添加用户-->
+    <insert id="insertUser" parameterType="com.mybatis.demo1.pojo.TbUser">
+        INSERT INTO TB_USER(
+            user_name,
+            password,
+            name,
+            age,
+            sex,
+            birthday,
+            created,
+            updated
+        )
+        VALUES(
+            #{user_name},
+            #{password},
+            #{name},
+            #{age},
+            #{sex},
+            #{birthday},
+            now(),
+            now()
+        );
+    </insert>
+
+    <!--更新-->
+    <update id="updateUser" parameterType="com.mybatis.demo1.pojo.TbUser">
+        UPDATE TB_USER
+        <trim prefix="set" suffixOverrides=",">
+            <if test="user_name!=null">user_name = #{user_name},</if>
+            <if test="password!=null">password = #{password},</if>
+            <if test="name!=null">name = #{name},</if>
+            <if test="age!=null">age = #{age},</if>
+            <if test="sex!=null">sex = #{sex},</if>
+            <if test="birthday!=null">birthday = #{birthday},</if>
+            updated = now(),
+        </trim>
+        WHERE id = #{id}
+    </update>
+
+    <!--删除-->
+    <delete id="delUser">
+        DELETE FROM TB_USER WHERE ID =#{ID}
+    </delete>
 </mapper>
