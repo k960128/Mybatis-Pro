@@ -17,4 +17,18 @@ public interface UserDao {
     * */
     public List<User> queryUser1(@Param("tableName")String tableName);
 
+    /**
+     * 添加用户
+     * @param user
+     */
+    public void insertUser(User user);
+
+    /**
+     * 根据用户模糊查询
+     */
+    public List<User> findByUsername(@Param("username") String username);
+
+    /*
+    *
+    * */
 }

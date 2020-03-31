@@ -24,4 +24,19 @@
     <select id="queryUser1" resultType="com.mybatis.demo1.pojo.User">
         SELECT * FROM ${tableName}
     </select>
+
+    <!--
+        添加用户
+    -->
+    <insert id="insertUser" parameterType="com.mybatis.demo1.pojo.User" >
+        INSERT INTO USER(username,password) VALUES(#{username},#{password})
+    </insert>
+
+    <!--
+        根据用户名条件查询
+    -->
+    <select id="findByUsername" resultType="User">
+        SELECT * FROM USER WHERE username LIKE '%${username}%'
+
+    </select>
 </mapper>

@@ -39,6 +39,8 @@
 
         <mapper resource="com/mybatis/demo1/dao/TbUserMapper.xml"></mapper>
         <mapper resource="com/mybatis/demo1/dao/UserMapper.xml"></mapper>
+
+
     </mappers>
 
 
