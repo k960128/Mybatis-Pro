@@ -29,6 +29,14 @@ public interface UserDao {
     public List<User> findByUsername(@Param("username") String username);
 
     /*
-    *
+    *   根据Sql片段查询
     * */
+    public List<User> querySqlUser();
+
+/*    1、一旦有条件成立的when，后续的when就不再执行
+      2、当所有的when都不执行，才会执行otherwise*/
+
+    public List<User> queryUserListByNameOrPass(@Param("username") String username,@Param("password") String password);
+
+
 }

@@ -3,12 +3,25 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+
+
 <!--
     #{}
     ${}
     区别
 -->
 <mapper namespace="com.mybatis.demo1.dao.UserDao">
+
+
+
+    <!--SQL片段-->
+    <!--也可以单独定义在xml文件中，但是要在config文件中配置mapper文件-->
+    <sql id="commonSql">
+        id,
+        username,
+        password
+    </sql>
+
 
 <!--
     /*
@@ -37,6 +50,32 @@
     -->
     <select id="findByUsername" resultType="User">
         SELECT * FROM USER WHERE username LIKE '%${username}%'
+
+    </select>
+
+    <!--根据sql片段查询-->
+    <select id="querySqlUser" resultType="com.mybatis.demo1.pojo.User">
+        SELECT <include refid="commonSql"></include> from USER
+    </select>
+
+    <!--CHOOSE WHEN OTHERWISE-->
+    <select id="queryUserListByNameOrPass" resultType="com.mybatis.demo1.pojo.User">
+        SELECT * FROM USER WHERE username LIKE '%admin%'
+        <!--
+            1、一旦有条件成立的when，后续的when就不再执行
+            2、当所有的when都不执行，才会执行otherwise
+        -->
+        <choose>
+            <when test="username!=null and username.trim()!=''">
+                AND username like '%${username}%'
+            </when>
+            <when test="password!=null and password.trim()!=''">
+                AND password like '%#{password}%'
+            </when>
+            <otherwise>
+                AND id = 1
+            </otherwise>
+        </choose>
 
     </select>
 </mapper>

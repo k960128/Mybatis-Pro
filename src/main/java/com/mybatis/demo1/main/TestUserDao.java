@@ -85,4 +85,33 @@ public class TestUserDao {
         }
     }
 
+    /*
+    Sql片段查询用户信息
+    * */
+    @Test
+    public void querySqlUser(){
+        UserDao userDao = sqlSession.getMapper(UserDao.class);
+        List<User> userList = userDao.querySqlUser();
+        for (User user: userList
+             ) {
+            System.out.println(user.toString());
+        }
+    }
+
+    /*
+    <!--
+            1、一旦有条件成立的when，后续的when就不再执行
+            2、当所有的when都不执行，才会执行otherwise
+        -->
+    * */
+    @Test
+    public void queryUserListByNameOrPass(){
+        UserDao userDao = sqlSession.getMapper(UserDao.class);
+        List<User> userList = userDao.queryUserListByNameOrPass("1","");
+        for (User user: userList
+             ) {
+            System.out.println(user.toString());
+        }
+    }
+
 }
